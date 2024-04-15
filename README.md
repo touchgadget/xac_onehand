@@ -64,18 +64,26 @@ RPI-RP2 appears, drag and drop the UF2 file on the drive.
 
 https://learn.adafruit.com/adafruit-feather-rp2040-with-usb-type-a-host/pinouts#buttons-and-rst-pin-3143253
 
-### How to build xac_onehand
+### How to build xac_onehand source code
 
 This is optional because compiled code is available in the uf2/ folder.
 
 ![xac_onehand build options](./images/build_options.jpg)
 
-* Arduino IDE 1.8.19 but newer versions should also work.
+Note the following options must be changed from the default values.
+
+* The "CPU Speed" option is set to "120 MHz".
+* The "USB Stack: option is set to "Adafruit TinyUSB".
+
+The Arduino IDE 1.8.19 is used but newer versions should also work.
 
 Install the following libraries using the IDE library manager.
 
 * Adafruit TinyUSB Library
 * Pico PIO USB
+
+Install a ZIP file from https://github.com/touchgadget/flight_stick_tinyusb then install
+the library using the IDE "Install ZIP Library".
 
 ## Miscellaneous
 
