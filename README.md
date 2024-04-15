@@ -48,7 +48,7 @@ there is no need for power from the QWIIC cable.
 
 Burn this UF2 file into the QT Py RP2040.
 
-./uf2/i2c_demo_rx.ino.adafruit_qtpy_rp2040.uf2
+[QT Py UF2 code file](./uf2/i2c_demo_rx.ino.adafruit_qtpy_rp2040.uf2)
 
 This explains how to put the board in bootloader mode. When the USB drive
 RPI-RP2 appears, drag and drop the UF2 file on the drive.
@@ -57,7 +57,7 @@ https://learn.adafruit.com/adafruit-qt-py-2040/pinouts#buttons-3091444
 
 ### Adafruit Feather RP2040 with USB Type A Host
 
-./uf2/xac_onehand.ino.adafruit_feather_usb_host.uf2
+[Feather RP2040 UF2 code file](./uf2/xac_onehand.ino.adafruit_feather_usb_host.uf2)
 
 This explains how to put the board in bootloader mode. When the USB drive
 RPI-RP2 appears, drag and drop the UF2 file on the drive.
