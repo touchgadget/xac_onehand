@@ -52,6 +52,23 @@ const bool DEBUG_ON = false;
 // I2C flight stick joystick
 #include <Wire.h>
 
+#if defined(ARDUINO_ARCH_RP2040) \
+    || defined(ARDUINO_ADAFRUIT_QTPY_ESP32S2) \
+    || defined(ARDUINO_ADAFRUIT_QTPY_ESP32S3_NOPSRAM) \
+    || defined(ARDUINO_ADAFRUIT_QTPY_ESP32S3) \
+    || defined(ARDUINO_ADAFRUIT_QTPY_ESP32_PICO) \
+    || defined(ARDUINO_SAM_DUE) \
+    || defined(ARDUINO_ARCH_RENESAS_UNO)
+  #if defined(ARDUINO_ADAFRUIT_FEATHER_RP2040_USB_HOST) \
+      || defined(ARDUINO_ADAFRUIT_FEATHER_RP2040)
+    #define QWIIC Wire
+  #else
+    #define QWIIC Wire1
+  #endif
+#else
+  #define QWIIC Wire
+#endif
+
 // USB flight stick joystick
 Adafruit_USBD_HID G_usb_hid;
 FSJoystick FSJoy(&G_usb_hid);
@@ -157,9 +174,9 @@ void xac_center_all(void) {
   FSJoy_right.x = XAC_MID;
   FSJoy_right.y = XAC_MID;
   FSJoy_right.twist = 127;
-  Wire.beginTransmission(0x30);
-  Wire.write((uint8_t *)&FSJoy_right, sizeof(FSJoy_right));
-  Wire.endTransmission();
+  QWIIC.beginTransmission(0x30);
+  QWIIC.write((uint8_t *)&FSJoy_right, sizeof(FSJoy_right));
+  QWIIC.endTransmission();
 }
 
 
@@ -169,8 +186,8 @@ void xac_center_all(void) {
 
 void setup()
 {
-  Wire.setClock(400000);
-  Wire.begin();
+  QWIIC.setClock(400000);
+  QWIIC.begin();
   
   if (DEBUG_ON) {
     FSJoy.begin();
@@ -271,9 +288,9 @@ void loop()
       FSJoy_right.x = xac_right_x;
       FSJoy_right.y = xac_right_y;
       FSJoy_right.buttons_a = xac_right_buttons;
-      Wire.beginTransmission(0x30);
-      Wire.write((uint8_t *)&FSJoy_right, sizeof(FSJoy_right));
-      Wire.endTransmission();
+      QWIIC.beginTransmission(0x30);
+      QWIIC.write((uint8_t *)&FSJoy_right, sizeof(FSJoy_right));
+      QWIIC.endTransmission();
     }
     HID_Report.available = false;
   }

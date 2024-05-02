@@ -41,6 +41,8 @@
     Adafruit_USBH_Host USBHost(&SPI, 15, 14);
   #elif defined(ARDUINO_ADAFRUIT_FEATHER_ESP32_V2)
     Adafruit_USBH_Host USBHost(&SPI, 33, 15);
+  #elif defined(ARDUINO_ADAFRUIT_QTPY_RP2040)
+    Adafruit_USBH_Host USBHost(&SPI, A1, A2);
   #else
     // Default CS and INT are pin 10, 9
     Adafruit_USBH_Host USBHost(&SPI, 10, 9);
@@ -56,7 +58,7 @@
 
 #ifdef ARDUINO_ADAFRUIT_FEATHER_RP2040_USB_HOST
 static void rp2040_configure_pio_usb(void) {
-  //while ( !Serial ) delay(10);   // wait for native usb
+  while (!Serial && (millis() < 4000)) delay(10);   // wait for native usb
   Serial.println("Core1 setup to run TinyUSB host with pio-usb");
 
   // Check for CPU frequency, must be multiple of 120Mhz for bit-banging USB
