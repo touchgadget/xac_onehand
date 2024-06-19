@@ -1,17 +1,23 @@
 # Xbox Adaptive Controller Flight Joystick
 
+**NOTE** XAC firmware released in June 2024 maps the joystick hat switch to the
+XAC dpad. See https://github.com/touchgadget/xac_onehand_controller for details
+on remapping the XAC dpad to the XAC right joystick. This is a simpler
+alternative to this project.
+
 xac_onehand connects a USB flight stick such as a Logitech Extreme 3D Pro to
-both USB ports on an Xbox Adaptive Controller (XAC). This is useful for one
-handed players to play two joystick games.
+both USB ports on an Xbox Adaptive Controller (XAC). This allows one handed
+players to play two joystick games.
 
 This project was inspired by an older XAC joystick splitter project. This
 project uses newer boards and is simplified by using QWIIC/Stemma QT to connect
-the boards. No soldering is needed.
+the boards. No soldering is needed for one option.
 
 ![Flight Stick to Xbox Adaptive Controller](./images/system_photo.jpg)
 
 Note the cut red wire. More below. The wire ends are left flying to make clear
-in the photo the red wire is cut. The ends should be trimmed closer to connectors.
+in the photo the red wire is cut. The ends should be trimmed closer to
+connectors.
 
 ## Easy Build for Two Logitech Flight Sticks
 
@@ -22,6 +28,28 @@ configuration.
 * 1 X Adafruit QT Py RP2040
 * 1 X QWIIC/Stemma QT cable
 * 1 X Adafruit Feather RP2040 with USB Type A Host
+* 1 X [Adafruit Case](https://learn.adafruit.com/case-for-feather-rp2040-usb-host)
+
+The Feather RP2040 with USB Type A Host board plugs in to the XAC left USB
+port. The flight stick X and Y axes control the XAC left thumb stick.
+
+The QT Py RP2040 plugs in to the XAC right USB port. The flight stick Z/twist
+axis controls the right thumb stick X axis. The flight stick hat switch forward
+and backward control the right thumb stick Y axis.
+
+The RP2040 USB host sends joystick parameters to the QT Py over the
+QWIIC/Stemma QT I2C port. The QT Py relays the joystick parameters out its USB
+port.
+
+## Build supports the above sticks and the Thrustmaster T.16000M FCS
+
+This works with the Logitech Extreme 3D Pro, the Logitech X52 H.O.T.A.S.
+joysticks, and the Thrustmaster T.16000M FCS. The QT Py RP2040 and USB Host BFF
+must be soldered.
+
+* 2 X Adafruit QT Py RP2040
+* 1 X Adafruit QT Py RP2040
+* 1 X QWIIC/Stemma QT cable
 * 1 X [Adafruit Case](https://learn.adafruit.com/case-for-feather-rp2040-usb-host)
 
 The Feather RP2040 with USB Type A Host board plugs in to the XAC left USB
